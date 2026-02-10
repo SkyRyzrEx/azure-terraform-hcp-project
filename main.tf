@@ -16,4 +16,10 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name = "rg-terraform-demo"
   location = "Australia East"
+
+  tags = {
+    environment = "learning"
+    project = "terraform-azure-demo"
+    owner = "jack"
+  }
 }
