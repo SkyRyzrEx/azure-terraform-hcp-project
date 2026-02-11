@@ -41,7 +41,7 @@ resource "azurerm_virtual_network" "vnet" {
     name = "subnet2"
     address_prefixes = ["10.0.2.0/24"]
   }
-}
+
   tags = {
     environment = "learning"
     project = "terraform-azure-demo"
