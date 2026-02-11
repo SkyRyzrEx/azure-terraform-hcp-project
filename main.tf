@@ -21,5 +21,6 @@ resource "azurerm_resource_group" "rg" {
     environment = "learning"
     project = "terraform-azure-demo"
     owner = "jack"
+    cost-center = "personal-lab"
   }
 }
