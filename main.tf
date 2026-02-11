@@ -24,6 +24,8 @@ resource "azurerm_resource_group" "rg" {
     cost-center = "personal-lab"
   }
 
+}
+
 # Create a vnet with a single address space and 2 subnets 
 
 resource "azurerm_virtual_network" "vnet" {
