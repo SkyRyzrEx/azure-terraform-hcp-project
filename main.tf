@@ -53,7 +53,7 @@ resource "azurerm_network_security_group" "nsg" {
 
   security_rule {
     name = "allow-rdp"
-    priority = 1000
+    priority = "1000"
     direction = "Inbound"
     access = "Allow"
     protocol = "Tcp"
@@ -66,7 +66,7 @@ resource "azurerm_network_security_group" "nsg" {
 
 # Associate the above Network Security Group with subnet1
 
-resource "azure_subnet_network_security_group_association" "subnet1_assoc {
+resource "azure_subnet_network_security_group_association" "subnet1_assoc" {
   subnet_id = azurerm_subnet.subnet1.id
   network_security_group_id = azurerm_network_security_group.nsg.id
 }
