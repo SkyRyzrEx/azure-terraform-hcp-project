@@ -23,7 +23,6 @@ resource "azurerm_resource_group" "rg" {
     owner = "jack"
     cost-center = "personal-lab"
   }
-
 }
 
 # Create a vnet with a single address space and 2 subnets 
@@ -43,7 +42,12 @@ resource "azurerm_virtual_network" "vnet" {
     name = "subnet2"
     address_prefixes = ["10.0.2.0/24"]
   }
-}
+
+  tags = {
+    environment = "learning"
+    project = "terraform-azure-demo"
+  }
+} 
 
 # Create a NSG within the vNET to allow RDP on port 3389
 
@@ -54,7 +58,7 @@ resource "azurerm_network_security_group" "nsg" {
 
   security_rule {
     name = "allow-rdp"
-    priority = "1000"
+    priority = 1000
     direction = "Inbound"
     access = "Allow"
     protocol = "Tcp"
@@ -67,13 +71,7 @@ resource "azurerm_network_security_group" "nsg" {
 
 # Associate the above Network Security Group with subnet1
 
-resource "azure_subnet_network_security_group_association" "subnet1_assoc" {
+resource "azurerm_subnet_network_security_group_association" "subnet1_assoc" {
   subnet_id = azurerm_subnet.subnet1.id
   network_security_group_id = azurerm_network_security_group.nsg.id
-}
-  
-tags = {
-    environment = "learning"
-    project = "terraform-azure-demo"
   }
-}
