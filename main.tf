@@ -44,7 +44,34 @@ resource "azurerm_virtual_network" "vnet" {
     address_prefixes = ["10.0.2.0/24"]
   }
 
-  tags = {
+# Create a NSG within the vNET to allow RDP on port 3389
+
+resource "azurerm_network_security_group" "nsg" {
+    name = "tf-learning-nsg"
+    location = "Australia East"
+    resource_group_name = "rg_terraform_demo"
+
+  security_rule {
+    name = "allow-rdp"
+    priority = 1000
+    direction = "Inbound"
+    access = "Allow"
+    protocol = "Tcp"
+    source_port_range = "*"
+    destination_port_range = "3389"
+    source_address_prefix = "*"
+    destination_address_prefix = "*"
+  }
+ }
+
+# Associate the above Network Security Group with subnet1
+
+resource "azure_subnet_network_security_group_association" "subnet1_assoc {
+  subnet_id = azurerm_subnet.subnet1.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
+}
+  
+tags = {
     environment = "learning"
     project = "terraform-azure-demo"
   }
