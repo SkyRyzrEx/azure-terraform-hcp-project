@@ -47,6 +47,12 @@ resource "azurerm_virtual_network" "vnet" {
     security_group       = azurermm_network_security_group.nsg.id
   }
 
+ tags = {
+    environment = "learning"
+    project     = "terraform-azure-demo"
+  }
+}
+
 # ------------------------
 # Network Security Group
 # ------------------------
