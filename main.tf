@@ -44,7 +44,7 @@ resource "azurerm_virtual_network" "vnet" {
   subnet {
     name                 = "subnet2"
     address_prefixes     = ["10.0.2.0/24"]
-    security_group       = azurermm_network_security_group.nsg.id
+    security_group       = azurerm_network_security_group.nsg.id
   }
 
  tags = {
@@ -77,12 +77,4 @@ resource "azurerm_network_security_group" "nsg" {
     environment = "learning"
     project     = "terraform-azure-demo"
   }
-}
-
-# ------------------------
-# Associate NSG with subnet1
-# ------------------------
-resource "azurerm_subnet_network_security_group_association" "subnet1_assoc" {
-  subnet_id                 = azurerm_subnet.subnet1.id
-  network_security_group_id = azurerm_network_security_group.nsg.id
 }
